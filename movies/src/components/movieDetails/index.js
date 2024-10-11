@@ -1,42 +1,75 @@
 import React from "react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
-import IconButton from "@mui/material/IconButton";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import MonetizationIcon from "@mui/icons-material/MonetizationOn";
+import StarRate from "@mui/icons-material/StarRate";
+import NavigationIcon from "@mui/icons-material/Navigation";
+import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
-import HomeIcon from "@mui/icons-material/Home";
 
-const MovieHeader = (props) => {
-    const movie = props.movie;
+
+const root = {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    listStyle: "none",
+    padding: 1.5,
+    margin: 0,
+};
+const chip = { margin: 0.5 };
+
+const MovieDetails = ( props) => {
+    const movie = props.movie
 
     return (
-        <Paper
-            component="div"
-            sx={{
-                display: "flex",
-                justifyContent: "space-around",
-                flexWrap: "wrap",
-                padding: 1.5,
-                margin: 0,
-            }}
-        >
-            <IconButton aria-label="go back">
-                <ArrowBackIcon color="primary" fontSize="large" />
-            </IconButton>
-
-            <Typography variant="h4" component="h3">
-                {movie.title}
-                <a href={movie.homepage}>
-                    <HomeIcon color="primary" />
-                </a>
-                <br />
-                <span sx={{ fontSize: "1.5rem" }}>{`   "${movie.tagline}"`} </span>
+        <>
+            <Typography variant="h5" component="h3">
+                Overview
             </Typography>
-            <IconButton aria-label="go forward">
-                <ArrowForwardIcon color="primary" fontSize="large" />
-            </IconButton>
-        </Paper>
+
+            <Typography variant="h6" component="p">
+                {movie.overview}
+            </Typography>
+
+            <Paper
+                component="ul"
+                sx={{...root}}
+            >
+                <li>
+                    <Chip label="Genres" sx={{...chip}} color="primary" />
+                </li>
+                {movie.genres.map((g) => (
+                    <li key={g.name}>
+                        <Chip label={g.name} sx={{...chip}} />
+                    </li>
+                ))}
+            </Paper>
+            <Paper component="ul" sx={{...root}}>
+                <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
+                <Chip
+                    icon={<MonetizationIcon />}
+                    label={`${movie.revenue.toLocaleString()}`}
+                />
+                <Chip
+                    icon={<StarRate />}
+                    label={`${movie.vote_average} (${movie.vote_count}`}
+                />
+                <Chip label={`Released: ${movie.release_date}`} />
+            </Paper>
+            <Fab
+                color="secondary"
+                variant="extended"
+                sx={{
+                    position: "fixed",
+                    bottom: 2,
+                    right: 2
+                }}
+            >
+                <NavigationIcon />
+                Reviews
+            </Fab>
+        </>
     );
 };
-
-export default MovieHeader;
+export default MovieDetails ;
