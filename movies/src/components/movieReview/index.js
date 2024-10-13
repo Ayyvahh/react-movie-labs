@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 
-const MovieReview =  ({ review }) => {
+const MovieReview = ({ review }) => {
     return (
         <>
             <Typography variant="h5" component="h3">

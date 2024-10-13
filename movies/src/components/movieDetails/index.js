@@ -1,4 +1,5 @@
-import React, { useState } from "react";import Chip from "@mui/material/Chip";
+import React, { useState } from "react";
+import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
@@ -8,6 +9,7 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+
 
 
 const root = {
@@ -35,18 +37,18 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
 
             <Paper
                 component="ul"
-                sx={{...root}}
+                sx={{ ...root }}
             >
                 <li>
-                    <Chip label="Genres" sx={{...chip}} color="primary" />
+                    <Chip label="Genres" sx={{ ...chip }} color="primary" />
                 </li>
                 {movie.genres.map((g) => (
                     <li key={g.name}>
-                        <Chip label={g.name} sx={{...chip}} />
+                        <Chip label={g.name} sx={{ ...chip }} />
                     </li>
                 ))}
             </Paper>
-            <Paper component="ul" sx={{...root}}>
+            <Paper component="ul" sx={{ ...root }}>
                 <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
                 <Chip
                     icon={<MonetizationIcon />}
@@ -58,10 +60,20 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
                 />
                 <Chip label={`Released: ${movie.release_date}`} />
             </Paper>
+            <Paper component="ul" sx={{ ...root }}>
+                <li>
+                    <Chip label="Production countries" sx={{ ...chip }} color="primary" />
+                </li>
+                {movie.production_countries.map((g) => (
+                    <li key={g.name}>
+                        <Chip label={g.name} sx={{ ...chip }} />
+                    </li>
+                ))}
+            </Paper>
             <Fab
                 color="secondary"
                 variant="extended"
-                onClick={() =>setDrawerOpen(true)}
+                onClick={() => setDrawerOpen(true)}
                 sx={{
                     position: 'fixed',
                     bottom: '1em',
@@ -77,4 +89,4 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         </>
     );
 };
-export default MovieDetails ;
+export default MovieDetails;
