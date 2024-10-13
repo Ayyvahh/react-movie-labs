@@ -1,5 +1,5 @@
-import React, {useState, useEffect}  from "react";
-import { useParams } from 'react-router-dom';import Card from "@mui/material/Card";
+import React from "react";
+import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,15 +10,13 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import IconButton from "@mui/material/IconButton";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import { Link } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 
-
 export default function MovieCard(props) {
     const movie = props.movie;
-
 
     const handleAddToFavorite = (e) => {
         e.preventDefault();
@@ -26,7 +24,7 @@ export default function MovieCard(props) {
     };
 
     return (
-        <Card>
+        <Card sx={{ maxWidth: 345 }}>
             <CardHeader
                 avatar={
                     movie.favorite ? (
@@ -51,13 +49,13 @@ export default function MovieCard(props) {
             />
             <CardContent>
                 <Grid container>
-                    <Grid size={{xs: 6}}>
+                    <Grid item xs={6}>
                         <Typography variant="h6" component="p">
                             <CalendarIcon fontSize="small" />
                             {movie.release_date}
                         </Typography>
                     </Grid>
-                    <Grid size={{xs: 6}}>
+                    <Grid item xs={6}>
                         <Typography variant="h6" component="p">
                             <StarRateIcon fontSize="small" />
                             {"  "} {movie.vote_average}{" "}

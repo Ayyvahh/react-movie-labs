@@ -1,4 +1,5 @@
-import React, {useState, useEffect}  from "react";import Card from "@mui/material/Card";
+import React, { useState, useEffect } from "react";
+import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -12,34 +13,38 @@ import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg'
 import { getGenres } from "../../api/tmdb-api";
 
 const formControl =
-    {
-        margin: 1,
-        minWidth: 220,
-        backgroundColor: "rgb(255, 255, 255)"
-    };
+{
+    margin: 1,
+    minWidth: 220,
+    backgroundColor: "rgb(255, 255, 255)"
+};
 
 export default function FilterMoviesCard(props) {
+
     const [genres, setGenres] = useState([{ id: '0', name: "All" }])
+
     useEffect(() => {
         getGenres().then((allGenres) => {
-            setGenres([genres[0], ...allGenres]);
+          setGenres([genres[0], ...allGenres]);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+      }, [])
 
     const handleChange = (e, type, value) => {
         e.preventDefault()
         props.onUserInput(type, value)   // NEW
-    }
+      }
     const handleTextChange = e => {
         handleChange(e, "name", e.target.value)
     }
     const handleGenreChange = e => {
         handleChange(e, "genre", e.target.value)
     };
+
     return (
         <Card
             sx={{
+                maxWidth: 345,
                 backgroundColor: "rgb(204, 204, 0)"
             }}
             variant="outlined">
@@ -49,7 +54,7 @@ export default function FilterMoviesCard(props) {
                     Filter the movies.
                 </Typography>
                 <TextField
-                    sx={{...formControl}}
+                    sx={{ ...formControl }}
                     id="filled-search"
                     label="Search field"
                     type="search"
@@ -57,7 +62,7 @@ export default function FilterMoviesCard(props) {
                     value={props.titleFilter}
                     onChange={handleTextChange}
                 />
-                <FormControl sx={{...formControl}}>
+                <FormControl sx={{ ...formControl }}>
                     <InputLabel id="genre-label">Genre</InputLabel>
                     <Select
                         labelId="genre-label"
