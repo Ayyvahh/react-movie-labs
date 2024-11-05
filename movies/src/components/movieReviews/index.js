@@ -21,37 +21,37 @@ export default function MovieReviews({ movie }) {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{minWidth: 550}} aria-label="reviews table">
-        <TableHead>
-          <TableRow>
-            <TableCell >Author</TableCell>
-            <TableCell align="center">Excerpt</TableCell>
-            <TableCell align="right">More</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {reviews.map((r) => (
-            <TableRow key={r.id}>
-              <TableCell component="th" scope="row">
-                {r.author}
-              </TableCell>
-              <TableCell >{excerpt(r.content)}</TableCell>
-              <TableCell >
-              <Link
-                  to={`/reviews/${r.id}`}
-                  state={{
-                      review: r,
-                      movie: movie,
-                  }}
-                >
-                  Full Review
-                </Link>
-              </TableCell>
+      <TableContainer component={Paper}>
+        <Table sx={{minWidth: 550}} aria-label="reviews table">
+          <TableHead>
+            <TableRow>
+              <TableCell >Author</TableCell>
+              <TableCell align="center">Excerpt</TableCell>
+              <TableCell align="right">More</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {reviews.map((r) => (
+                <TableRow key={r.id}>
+                  <TableCell component="th" scope="row">
+                    {r.author}
+                  </TableCell>
+                  <TableCell >{excerpt(r.content)}</TableCell>
+                  <TableCell >
+                    <Link
+                        to={`/reviews/${r.id}`}
+                        state={{
+                          review: r,
+                          movie: movie,
+                        }}
+                    >
+                      Full Review
+                    </Link>
+                  </TableCell>
+                </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
   );
 }
