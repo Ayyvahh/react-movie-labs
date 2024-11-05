@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MovieHeader from "../headerMovie";
-import Grid from "@mui/material/Grid";
+import Grid from "@mui/material/Grid2";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { getMovieImages } from "../../api/tmdb-api";
@@ -19,15 +19,19 @@ const TemplateMoviePage = ({ movie, children }) => {
     <>
       <MovieHeader movie={movie} />
 
-      <Grid container spacing={5} sx={{ padding: "15px" }}>
-        <Grid item xs={3}>
+      <Grid container spacing={5} style={{ padding: "15px" }}>
+        <Grid size={{xs: 3}}>
           <div sx={{
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "space-around",
           }}>
-            <ImageList 
-                cols={1}>
+            <ImageList
+                sx={{
+                    height: "100vh",
+                }}
+                cols={1}
+            >
                 {images.map((image) => (
                     <ImageListItem key={image.file_path} cols={1}>
                     <img
@@ -40,7 +44,7 @@ const TemplateMoviePage = ({ movie, children }) => {
           </div>
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid size={{xs: 9}}>
           {children}
         </Grid>
       </Grid>
