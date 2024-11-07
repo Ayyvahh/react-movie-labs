@@ -1,4 +1,3 @@
-import React, { useContext  } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -11,12 +10,15 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid2";
-import img from '../../images/film-poster-placeholder.png';
-import { Link } from "react-router-dom";
+import img from '../../images/film-poster-placeholder.png'
+import {Link} from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
+import React, { useContext  } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
 
+
 export default function MovieCard({ movie, action }) {
+
     const { favorites, addToFavorites } = useContext(MoviesContext);
 
     if (favorites.find((id) => id === movie.id)) {
@@ -47,7 +49,7 @@ export default function MovieCard({ movie, action }) {
                 }
             />
             <CardMedia
-                sx={{ height: 500 }}
+                sx={{height: 500}}
                 image={
                     movie.poster_path
                         ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -58,13 +60,13 @@ export default function MovieCard({ movie, action }) {
                 <Grid container>
                     <Grid size={{xs: 6}}>
                         <Typography variant="h6" component="p">
-                            <CalendarIcon fontSize="small" />
+                            <CalendarIcon fontSize="small"/>
                             {movie.release_date}
                         </Typography>
                     </Grid>
                     <Grid size={{xs: 6}}>
                         <Typography variant="h6" component="p">
-                            <StarRateIcon fontSize="small" />
+                            <StarRateIcon fontSize="small"/>
                             {"  "} {movie.vote_average}{" "}
                         </Typography>
                     </Grid>

@@ -8,9 +8,10 @@ export default function CircularIndeterminate() {
             justifyContent: "center",
             '& > * + *': {
                 marginLeft: '2em',
-            }}}>
-            <CircularProgress />
-            <CircularProgress />
+            }
+        }}>
+            <CircularProgress/>
+            <CircularProgress/>
         </div>
     );
 }

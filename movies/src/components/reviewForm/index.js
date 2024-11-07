@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useForm, Controller } from "react-hook-form";
-import { MoviesContext } from "../../contexts/moviesContext";
+import {useForm, Controller} from "react-hook-form";
+import React, {useState, useContext} from "react";
+import {MoviesContext} from "../../contexts/moviesContext";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const ratings = [
     {
@@ -60,17 +60,15 @@ const styles = {
     },
 };
 
-const ReviewForm = ({ movie }) => {
+const ReviewForm = ({movie}) => {
     const context = useContext(MoviesContext);
+
     const [rating, setRating] = useState(3);
+
     const [open, setOpen] = useState(false);
-    const navigate = useNavigate();
 
-    const handleSnackClose = (event) => {
-        setOpen(false);
-        navigate("/movies/favorites");
-    };
 
+    const navigate = useNavigate()
 
     const defaultValues = {
         author: "",
@@ -81,10 +79,16 @@ const ReviewForm = ({ movie }) => {
 
     const {
         control,
-        formState: { errors },
+        formState: {errors},
         handleSubmit,
         reset,
     } = useForm(defaultValues);
+
+
+    const handleSnackClose = (event) => {
+        setOpen(false);
+        navigate("/movies/favorites");
+    };
 
     const handleRatingChange = (event) => {
         setRating(event.target.value);
@@ -93,6 +97,7 @@ const ReviewForm = ({ movie }) => {
     const onSubmit = (review) => {
         review.movieId = movie.id;
         review.rating = rating;
+        // console.log(review);
         context.addReview(movie, review);
         setOpen(true); // NEW
     };
@@ -102,7 +107,6 @@ const ReviewForm = ({ movie }) => {
             <Typography component="h2" variant="h3">
                 Write a review
             </Typography>
-
             <Snackbar
                 sx={styles.snack}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -119,16 +123,15 @@ const ReviewForm = ({ movie }) => {
                     </Typography>
                 </MuiAlert>
             </Snackbar>
-
             <form sx={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
                 <Controller
                     name="author"
                     control={control}
-                    rules={{ required: "Name is required" }}
+                    rules={{required: "Name is required"}}
                     defaultValue=""
-                    render={({ field: { onChange, value } }) => (
+                    render={({field: {onChange, value}}) => (
                         <TextField
-                            sx={{ width: "40ch" }}
+                            sx={{width: "40ch"}}
                             variant="outlined"
                             margin="normal"
                             required
@@ -151,10 +154,10 @@ const ReviewForm = ({ movie }) => {
                     control={control}
                     rules={{
                         required: "Review cannot be empty.",
-                        minLength: { value: 10, message: "Review is too short" },
+                        minLength: {value: 10, message: "Review is too short"},
                     }}
                     defaultValue=""
-                    render={({ field: { onChange, value } }) => (
+                    render={({field: {onChange, value}}) => (
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -179,7 +182,7 @@ const ReviewForm = ({ movie }) => {
                 <Controller
                     control={control}
                     name="rating"
-                    render={({ field: { onChange, value } }) => (
+                    render={({field: {onChange, value}}) => (
                         <TextField
                             id="select-rating"
                             select
