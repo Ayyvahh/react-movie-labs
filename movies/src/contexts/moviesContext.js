@@ -28,6 +28,7 @@ const MoviesContextProvider = (props) => {
             newMustWatchList = [...favorites];
         }
         setMustWatch(newMustWatchList)
+        console.log("Must Watch List Updated:", newMustWatchList);
     };
 
     const removeFromMustWatchList = (movie) => {
